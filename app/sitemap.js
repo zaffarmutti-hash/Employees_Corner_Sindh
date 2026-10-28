@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const baseUrl = 'https://employeescornersindh.gov.pk';
+  const baseUrl = 'https://employeescornersindh.vercel.app';
   const now = new Date();
 
   return [
@@ -14,25 +14,6 @@ export default function sitemap() {
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.9
-    },
-    {
-      url: `${baseUrl}/#pension-fo2`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9
-    },
-    {
-      url: `${baseUrl}/#ddo-codes`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8
-    },
-    {
-      url: `${baseUrl}/#rules-faq`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8
     }
   ];
 }
-

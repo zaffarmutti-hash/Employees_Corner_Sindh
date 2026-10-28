@@ -2,140 +2,300 @@
 
 import { useState } from 'react';
 import Tr22App from './Tr22App';
-import PensionCalculator from './PensionCalculator';
-import DigitalRecordsArchive from './DigitalRecordsArchive';
-import DdoDirectory from './DdoDirectory';
-import SeoKnowledgeBase from './SeoKnowledgeBase';
+
+/* ── Dashboard cards configuration ─────────────────────────────────────── */
+const DASHBOARD_CARDS = [
+  {
+    id: 'tr22',
+    icon: '📄',
+    title: 'T.R. Form / Arrears Bill Proforma',
+    subtitle: 'Form T.R. 22 · Treasury Rule 265',
+    desc: 'Generate complete digitized 4-page Arrears Pay Bill for non-gazetted staff, including Obverse summary, month-wise arrears statement, deductions, and sanction certificates.',
+    status: 'Ready to Use',
+    clickable: true,
+    color: '#0b5d3b',
+    btnText: 'Open Proforma →',
+  },
+  {
+    id: 'pension',
+    icon: '🧮',
+    title: 'Pension & FO-2 Dossier',
+    subtitle: 'Civil Service Retirement Calculations',
+    desc: 'Compute gross pension, 35% commutation value, net monthly pension, and prepare Form FO-2 dossier sheets for retiring employees.',
+    status: 'Coming Soon',
+    clickable: false,
+    color: '#0284c7',
+  },
+  {
+    id: 'archive',
+    icon: '📂',
+    title: 'Digital Bills & Records Archive',
+    subtitle: 'Bill History & Cloud Backup',
+    desc: 'Browse, manage, and retrieve previously created salary bills, arrears records, and employee profiles with easy one-click reload.',
+    status: 'Coming Soon',
+    clickable: false,
+    color: '#7c3aed',
+  },
+  {
+    id: 'faq',
+    icon: '📚',
+    title: 'Rules & Treasury Guidelines',
+    subtitle: 'Administrative Knowledge Base',
+    desc: 'Step-by-step guides for Treasury Rule 265, admissible allowance rules, pay fixation instructions, and common audit objections.',
+    status: 'Coming Soon',
+    clickable: false,
+    color: '#d97706',
+  },
+  {
+    id: 'gpfund',
+    icon: '💰',
+    title: 'GP Fund Statement & Interest',
+    subtitle: 'General Provident Fund Ledger',
+    desc: 'Calculate annual compound interest on GP Fund subscriptions, project closing balances, and generate printable statement sheets.',
+    status: 'Coming Soon',
+    clickable: false,
+    color: '#059669',
+  },
+  {
+    id: 'increments',
+    icon: '📈',
+    title: 'Increment & Pay Scale Planner',
+    subtitle: 'Annual Increments & Fixations',
+    desc: 'Estimate future basic pay scales, track annual December increments, and verify allowance revisions across basic pay scales.',
+    status: 'Coming Soon',
+    clickable: false,
+    color: '#db2777',
+  },
+];
+
+/* ── Navigation bar items (DDO & Object removed) ──────────────────────── */
+const NAV_ITEMS = [
+  { id: 'home', icon: '🏠', label: 'Home', clickable: true },
+  { id: 'tr22', icon: '📄', label: 'T.R. Form / Arrears Bill Proforma', clickable: true },
+  { id: 'pension', icon: '🧮', label: 'Pension & FO-2', clickable: false, soon: true },
+  { id: 'archive', icon: '📂', label: 'Digital Records', clickable: false, soon: true },
+  { id: 'faq', icon: '📚', label: 'Rules & Guide', clickable: false, soon: true },
+];
 
 export default function EmployeesCornerPortal() {
-  const [activeTab, setActiveTab] = useState('tr22');
+  const [activeTab, setActiveTab] = useState('home');
 
-  const handleSelectBill = (id) => {
-    setActiveTab('tr22');
-    setTimeout(() => {
-      const sel = document.querySelector('#srv');
-      if (sel) {
-        sel.value = id;
-        sel.dispatchEvent(new Event('change', { bubbles: true }));
-      }
-    }, 150);
+  const navigateTo = (tabId) => {
+    setActiveTab(tabId);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
     <div className="portal-wrapper">
-      {/* Official Government Portal Header */}
+      {/* ── Top Header ── */}
       <header className="portal-header">
         <div className="portal-brand-row">
-          <div className="portal-brand">
+          <div className="portal-brand" onClick={() => navigateTo('home')} style={{ cursor: 'pointer' }}>
             <img
               src="/logo.png"
               alt="Employees Corner Sindh Logo"
               className="portal-logo"
             />
             <div className="portal-titles">
-              <span className="gov-badge">Government of Sindh · Finance &amp; Education Portal</span>
+              <span className="portal-badge-pill">Community Utility Portal</span>
               <h1 className="portal-main-title">Employees Corner Sindh</h1>
-              <p className="portal-tagline">Your Digital Workplace for a Better Tomorrow</p>
+              <p className="portal-tagline">Ease-of-Access Utilities for Teachers &amp; Non-Gazetted Staff</p>
             </div>
           </div>
-          <div className="portal-header-actions">
-            <div className="portal-quick-info">
-              <span><b>DDO Treasury Support:</b> TR-265 &amp; Form 2 (FO-2)</span>
-              <span><b>Portal Version:</b> 3.8 Professional (2026 Edition)</span>
-            </div>
+          <div className="portal-header-meta">
+            <span className="portal-edition-chip">v3.8 · Independent Utility</span>
           </div>
         </div>
 
-        {/* Navigation Tabs */}
-        <nav className="portal-nav-bar" aria-label="Portal Modules">
-          <button
-            onClick={() => setActiveTab('tr22')}
-            className={`portal-nav-btn ${activeTab === 'tr22' ? 'active' : ''}`}
-          >
-            <span className="icon">📄</span>
-            <span>Form T.R.22 Arrears Bill</span>
-          </button>
-          <button
-            onClick={() => setActiveTab('pension')}
-            className={`portal-nav-btn ${activeTab === 'pension' ? 'active' : ''}`}
-          >
-            <span className="icon">🧮</span>
-            <span>Pension &amp; FO-2 Dossier</span>
-          </button>
-          <button
-            onClick={() => setActiveTab('archive')}
-            className={`portal-nav-btn ${activeTab === 'archive' ? 'active' : ''}`}
-          >
-            <span className="icon">📂</span>
-            <span>Digital Bills &amp; Records</span>
-          </button>
-          <button
-            onClick={() => setActiveTab('ddo')}
-            className={`portal-nav-btn ${activeTab === 'ddo' ? 'active' : ''}`}
-          >
-            <span className="icon">🏛</span>
-            <span>DDO &amp; Object Codes</span>
-          </button>
-          <button
-            onClick={() => setActiveTab('faq')}
-            className={`portal-nav-btn ${activeTab === 'faq' ? 'active' : ''}`}
-          >
-            <span className="icon">📚</span>
-            <span>Rules &amp; FAQ</span>
-          </button>
+        {/* ── Enhanced Nav Bar ── */}
+        <nav className="portal-nav-bar" aria-label="Portal Navigation">
+          <div className="portal-nav-container">
+            {NAV_ITEMS.map((item) => {
+              const isActive = activeTab === item.id;
+              if (item.clickable) {
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => navigateTo(item.id)}
+                    className={`portal-nav-btn ${isActive ? 'active' : ''}`}
+                    type="button"
+                  >
+                    <span className="nav-icon">{item.icon}</span>
+                    <span className="nav-label">{item.label}</span>
+                  </button>
+                );
+              }
+              return (
+                <button
+                  key={item.id}
+                  disabled
+                  className="portal-nav-btn nav-btn-disabled"
+                  type="button"
+                  title={`${item.label} — Coming Soon`}
+                >
+                  <span className="nav-icon">{item.icon}</span>
+                  <span className="nav-label">{item.label}</span>
+                  <span className="nav-soon-pill">Soon</span>
+                </button>
+              );
+            })}
+          </div>
         </nav>
       </header>
 
-      {/* Main Content Area */}
+      {/* ── Main Content Area ── */}
       <main className="portal-content">
+        {/* ── HOME DASHBOARD ── */}
+        {activeTab === 'home' && (
+          <div className="dashboard-section">
+            {/* Hero Welcome Banner */}
+            <div className="dashboard-hero">
+              <div className="hero-content">
+                <span className="hero-pill">Welcome to Employees Corner Sindh</span>
+                <h2 className="hero-title">Administrative Ease for Teachers &amp; Staff</h2>
+                <p className="hero-desc">
+                  An independent digital workspace created to assist education staff, teachers, and
+                  non-gazetted employees in Sindh with pay bill documentation, arrears claims, and service calculations.
+                </p>
+              </div>
+              <div className="hero-highlight-card" onClick={() => navigateTo('tr22')}>
+                <div className="highlight-tag">Active Utility</div>
+                <div className="highlight-title">📄 Form T.R. 22 Arrears Bill Proforma</div>
+                <p className="highlight-text">
+                  Fully operational 4-page pay bill generator compliant with Treasury Rule 265. Click to begin creating or printing your arrears bill.
+                </p>
+                <span className="highlight-action">Open Arrears Bill Form →</span>
+              </div>
+            </div>
+
+            {/* Dashboard Modules Grid */}
+            <div className="dashboard-grid-header">
+              <h3 className="section-title">Portal Modules &amp; Utilities</h3>
+              <p className="section-subtitle">
+                Select an active module below or explore upcoming utilities currently under development.
+              </p>
+            </div>
+
+            <div className="dashboard-grid">
+              {DASHBOARD_CARDS.map((card) => {
+                if (card.clickable) {
+                  return (
+                    <div
+                      key={card.id}
+                      className="dash-card dash-card-active"
+                      style={{ '--accent-color': card.color }}
+                      onClick={() => navigateTo(card.id)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => e.key === 'Enter' && navigateTo(card.id)}
+                      aria-label={`Open ${card.title}`}
+                    >
+                      <div className="card-top-bar">
+                        <span className="card-icon-box">{card.icon}</span>
+                        <span className="card-badge card-badge-ready">{card.status}</span>
+                      </div>
+                      <h4 className="card-title">{card.title}</h4>
+                      <div className="card-subtitle">{card.subtitle}</div>
+                      <p className="card-desc">{card.desc}</p>
+                      <div className="card-footer">
+                        <span className="card-btn-action">{card.btnText}</span>
+                      </div>
+                    </div>
+                  );
+                }
+
+                return (
+                  <div
+                    key={card.id}
+                    className="dash-card dash-card-disabled"
+                    style={{ '--accent-color': card.color }}
+                    aria-disabled="true"
+                    title={`${card.title} — Coming Soon`}
+                  >
+                    <div className="card-top-bar">
+                      <span className="card-icon-box card-icon-muted">{card.icon}</span>
+                      <span className="card-badge card-badge-soon">{card.status}</span>
+                    </div>
+                    <h4 className="card-title">{card.title}</h4>
+                    <div className="card-subtitle">{card.subtitle}</div>
+                    <p className="card-desc">{card.desc}</p>
+                    <div className="card-footer">
+                      <span className="card-btn-disabled">Under Development</span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* ── TR22 ARREARS BILL PROFORMA ── */}
         <div style={{ display: activeTab === 'tr22' ? 'block' : 'none' }}>
+          {/* Top Breadcrumb & Return Bar */}
+          <div className="module-top-bar">
+            <button
+              onClick={() => navigateTo('home')}
+              className="btn-return-home"
+              type="button"
+            >
+              <span>←</span>
+              <span>Back to Dashboard</span>
+            </button>
+            <div className="module-breadcrumbs">
+              <span className="breadcrumb-link" onClick={() => navigateTo('home')}>Home</span>
+              <span className="breadcrumb-sep">/</span>
+              <span className="breadcrumb-current">T.R. Form / Arrears Bill Proforma (T.R. 22)</span>
+            </div>
+          </div>
+
           <Tr22App />
         </div>
-
-        {activeTab === 'pension' && <PensionCalculator />}
-        {activeTab === 'archive' && <DigitalRecordsArchive onSelectBill={handleSelectBill} />}
-        {activeTab === 'ddo' && <DdoDirectory />}
-        {activeTab === 'faq' && <SeoKnowledgeBase />}
       </main>
 
-      {/* SEO Footer */}
+      {/* ── Portal Footer ── */}
       <footer className="portal-footer">
         <div className="portal-footer-grid">
           <div>
-            <div style={{ fontWeight: 700, fontSize: 15, color: '#fff', marginBottom: 6 }}>
-              Employees Corner Sindh
-            </div>
-            <p style={{ fontSize: 13, lineHeight: 1.5, color: '#d1d5db', margin: 0 }}>
-              The comprehensive digital platform for Government of Sindh employees, DDOs, teachers, and accounts officers. Facilitates digitized pay bill preparation under Treasury Rule 265 and civil service retirement pensions under Sindh Pension Rules.
+            <div className="footer-col-title">Employees Corner Sindh</div>
+            <p className="footer-col-desc">
+              Dedicated community utility for teachers, non-gazetted employees, and education staff in Sindh.
+              Facilitates standardized pay bill preparation under Treasury Rule 265.
+            </p>
+            <p className="footer-col-notice">
+              Non-official community initiative · Independent utility
             </p>
           </div>
           <div>
-            <div style={{ fontWeight: 700, fontSize: 14, color: '#fff', marginBottom: 6 }}>
-              Core Digital Modules
-            </div>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, fontSize: 13, color: '#d1d5db', lineHeight: 1.8 }}>
-              <li>• Form T.R.22 Arrears Pay Bill Generator</li>
-              <li>• Pension Form 2 (FO-2) &amp; Commutation Sheet</li>
-              <li>• PIFRA / SAP Object Codes &amp; Allowance Heads</li>
-              <li>• District Accounts Offices (DAO) Directory</li>
+            <div className="footer-col-title">Available Modules</div>
+            <ul className="footer-col-list">
+              <li>
+                <button
+                  type="button"
+                  onClick={() => navigateTo('tr22')}
+                  style={{ background: 'none', border: 'none', padding: 0, color: '#93c5fd', cursor: 'pointer', textAlign: 'left', font: 'inherit' }}
+                >
+                  ✓ T.R. Form / Arrears Bill Proforma (T.R. 22)
+                </button>
+              </li>
+              <li>• Pension &amp; FO-2 Dossier <em>(coming soon)</em></li>
+              <li>• Digital Bills &amp; Records Archive <em>(coming soon)</em></li>
+              <li>• Rules &amp; Treasury FAQ <em>(coming soon)</em></li>
+              <li>• GP Fund Statement <em>(coming soon)</em></li>
             </ul>
           </div>
           <div>
-            <div style={{ fontWeight: 700, fontSize: 14, color: '#fff', marginBottom: 6 }}>
-              Author &amp; Attribution
-            </div>
-            <div style={{ fontSize: 13, color: '#d1d5db', lineHeight: 1.5 }}>
-              Created &amp; designed by <b>Asif Ali Shar</b>.<br />
-              Dedicated to modernizing public service administration and digital payroll processing across the Province of Sindh.
+            <div className="footer-col-title">Author &amp; Dedication</div>
+            <div className="footer-col-desc">
+              Designed &amp; developed by <b>Asif Ali Shar</b>.<br />
+              Built to simplify administrative workflows and pay bill processing for education staff.
             </div>
           </div>
         </div>
         <div className="portal-footer-bottom">
-          <span>© 2026 Employees Corner Sindh. All Rights Reserved.</span>
-          <span>Form T.R.22 compliant with Treasury Rule 265 &amp; Sindh Civil Servants Pension Rules</span>
+          <span>© 2026 Employees Corner Sindh. Independent educational &amp; administrative utility.</span>
+          <span>Standard Form T.R. 22 proforma compliant with Treasury Rule 265</span>
         </div>
       </footer>
     </div>
   );
 }
-

@@ -7,7 +7,6 @@ export default function robots() {
         disallow: ['/api/']
       }
     ],
-    sitemap: 'https://employeescornersindh.gov.pk/sitemap.xml'
+    sitemap: 'https://employeescornersindh.vercel.app/sitemap.xml'
   };
 }
-

@@ -2,7 +2,7 @@
 
 import { useState, useId } from 'react';
 
-// Official Sindh / Federal Commutation Table (Age at next birthday -> Factor)
+// Sindh / Federal Commutation Table (Age at next birthday -> Factor)
 const COMM_TABLE = {
   20: 40.5043, 21: 39.7341, 22: 38.9653, 23: 38.1974, 24: 37.4307,
   25: 36.6651, 26: 35.9006, 27: 35.1372, 28: 34.3750, 29: 33.6143,
@@ -141,7 +141,7 @@ export default function PensionCalculator() {
             onClick={() => setPreviewFo2(!previewFo2)}
             style={{ display: 'flex', alignItems: 'center', gap: 6 }}
           >
-            {previewFo2 ? '✏ Edit Data' : '📄 View / Print Official FO-2 Dossier'}
+            {previewFo2 ? '✏ Edit Data' : '📄 View / Print FO-2 Dossier'}
           </button>
         </div>
       </div>

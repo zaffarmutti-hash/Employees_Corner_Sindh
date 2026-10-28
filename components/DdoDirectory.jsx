@@ -54,10 +54,10 @@ export default function DdoDirectory() {
     <div className="portal-sec">
       <div className="card" style={{ borderLeft: '4px solid var(--g)' }}>
         <h2 style={{ fontSize: 18, margin: '0 0 4px', color: 'var(--g)' }}>
-          🏛 Sindh Treasury &amp; DDO Object Code Directory
+          🏛 Sindh Treasury &amp; DDO Object Code Reference Guide
         </h2>
         <div style={{ fontSize: 13, color: '#555' }}>
-          Official PIFRA / SAP Accounting Codes, Deduction Heads, and District Accounts Offices across Sindh
+          PIFRA / SAP Accounting Codes, Deduction Heads, and District Accounts Offices across Sindh for Teachers &amp; Staff
         </div>
       </div>
 

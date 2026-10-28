@@ -16,14 +16,14 @@ export default function Tr22App() {
       <div className="bar">
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginRight: 8 }}>
           <span style={{ background: '#e0f2fe', color: '#0369a1', padding: '3px 7px', borderRadius: 4, fontWeight: 700, fontSize: 12 }}>
-            T.R. 265
+            T.R. 22
           </span>
           <h2 style={{ fontSize: 15, margin: 0, color: 'var(--g)', whiteSpace: 'nowrap' }}>
-            Arrears Pay Bill Form
+            T.R. Form / Arrears Bill Proforma (Non-Gazetted Staff)
           </h2>
         </div>
-        <button className="pri" id="dlpdf" title="Generate and download official PDF from server">
-          📥 Download Server PDF
+        <button className="pri" id="dlpdf" title="Generate and download PDF">
+          📥 Download PDF
         </button>
         <button id="pr" title="Open print dialog">
           🖨 Print / Preview
@@ -54,14 +54,51 @@ export default function Tr22App() {
       </div>
 
       <div className="tab on" id="d">
-        <div className="card"><h2>Employee</h2><div className="gr" id="fe"></div></div>
-        <div className="card"><h2>Office &amp; bill header</h2><div className="gr" id="fo"></div></div>
-        <div className="card"><h2>Payment (reverse side)</h2><div className="gr" id="fp"></div></div>
+        <div className="card"><h2>1 · Teacher / Official Information &amp; Basic Pay</h2><div className="gr" id="fe"></div></div>
+        <div className="card"><h2>2 · Office &amp; Bill Header (T.R. 265)</h2><div className="gr" id="fo"></div></div>
+        <div className="card"><h2>3 · Payment &amp; Monthly Deductions (Reverse Side)</h2><div className="gr" id="fp"></div></div>
         <div className="card">
-          <h2>Allowance heads <small style={{ fontWeight: 'normal', color: '#666' }}>— tick the ones used in this bill (they become columns in the statement)</small></h2>
+          <h2>4 · Allowance Heads &amp; Monthly Rates <small style={{ fontWeight: 'normal', color: '#666' }}>— enter monthly rate or tick to include in Front Page columns</small></h2>
           <div className="sc" style={{ maxHeight: 'none' }}><table className="t hd" id="fh"></table></div>
         </div>
-        <div className="card"><h2>Other allowances &amp; extra pay (lump sums, optional)</h2><div className="gr" id="fx"></div></div>
+        <div className="card"><h2>5 · Other Allowances &amp; Extra Pay (Lump sums, optional)</h2><div className="gr" id="fx"></div></div>
+
+        {/* Front Page Columns Totals Summary Card */}
+        <div className="card" style={{ background: '#f8faf8', borderLeft: '4px solid var(--g)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, flexWrap: 'wrap', gap: 6 }}>
+            <h2 style={{ margin: 0, fontSize: 15, color: 'var(--g)' }}>
+              📊 Front Page (Obverse) Columns Totals Summary
+            </h2>
+            <span style={{ fontSize: 12, color: '#555' }}>
+              Auto-calculated totals that show in the Front Page columns &amp; statements
+            </span>
+          </div>
+          <div className="gr" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+            <div style={{ background: '#fff', padding: '8px 12px', border: '1px solid var(--ln)', borderRadius: 6 }}>
+              <div style={{ fontSize: 11, color: '#666' }}>Pay of Establishment (A01151)</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--g)' }} id="prev_pay">Rs. 0</div>
+            </div>
+            <div style={{ background: '#fff', padding: '8px 12px', border: '1px solid var(--ln)', borderRadius: 6 }}>
+              <div style={{ fontSize: 11, color: '#666' }}>Total Regular Allowances (020)</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--g)' }} id="prev_reg">Rs. 0</div>
+            </div>
+            <div style={{ background: '#fff', padding: '8px 12px', border: '1px solid var(--ln)', borderRadius: 6 }}>
+              <div style={{ fontSize: 11, color: '#666' }}>Gross Salary Est: Charge</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--g)' }} id="prev_gross">Rs. 0</div>
+            </div>
+            <div style={{ background: '#fff', padding: '8px 12px', border: '1px solid var(--ln)', borderRadius: 6 }}>
+              <div style={{ fontSize: 11, color: '#666' }}>Total Deductions (P &amp; C)</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: '#b91c1c' }} id="prev_ded">Rs. 0</div>
+            </div>
+            <div style={{ background: '#fff', padding: '8px 12px', border: '1px solid var(--ln)', borderRadius: 6 }}>
+              <div style={{ fontSize: 11, color: '#666' }}>Net Amount Payable</div>
+              <div style={{ fontSize: 18, fontWeight: 800, color: '#0b5d3b' }} id="prev_net">Rs. 0</div>
+            </div>
+          </div>
+          <div style={{ marginTop: 10, padding: '6px 10px', background: '#eef6f1', borderRadius: 5, fontSize: 12, fontWeight: 600, color: '#1e3a2b' }} id="prev_words">
+            Rupees Zero only
+          </div>
+        </div>
       </div>
 
       <div className="tab" id="m">
