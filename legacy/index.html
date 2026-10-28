@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Form T.R.22 – Arrears Pay Bill</title>
+<style>
+:root{--g:#0b5d3b;--ln:#d3d7cf}
+*{box-sizing:border-box}
+body{margin:0;font:14px/1.4 system-ui,"Segoe UI",Arial,sans-serif;background:#eef0ec;color:#1b1f1c}
+.bar{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--ln);padding:8px 14px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.bar h1{font-size:15px;margin:0 8px 0 0;color:var(--g)}
+button,.btn,select,input{font:inherit}
+button,.btn{border:1px solid var(--ln);background:#fff;border-radius:6px;padding:6px 11px;cursor:pointer}
+button:hover,.btn:hover{border-color:var(--g)}
+.pri{background:var(--g);color:#fff;border-color:var(--g)}
+.tbs{display:flex;gap:4px;margin-left:auto}.tbs .on{background:#e3efe8;border-color:var(--g);font-weight:600}
+.tab{display:none;padding:14px}.tab.on{display:block}
+.card{background:#fff;border:1px solid var(--ln);border-radius:8px;padding:12px 14px;margin-bottom:12px}
+.card h2{font-size:14px;margin:0 0 8px;color:var(--g)}
+.gr{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px}
+label{display:flex;flex-direction:column;font-size:12px;color:#555;gap:2px}
+label input,label select{padding:5px 7px;border:1px solid var(--ln);border-radius:5px;color:#111;font-size:14px}
+.ck{flex-direction:row;align-items:center;gap:6px;margin-top:8px}
+table.t{border-collapse:collapse;font-size:13px}
+.t th,.t td{border:1px solid var(--ln);padding:2px 3px;text-align:right}
+.t th{background:#f3f6f2;font-size:11px;position:sticky;top:0}
+.t input{width:78px;padding:3px 4px;border:1px solid transparent;text-align:right;background:transparent}
+.t input:focus{border-color:var(--g);background:#fff;outline:0}
+.t input[type=month]{width:128px;text-align:left}
+.t input.dup{background:#fde2e2}
+.t .k{font-weight:600;background:#f7f7f4}.t tfoot td{font-weight:700;background:#eef4ef}
+.t .hd input{width:100%;text-align:left;border-color:var(--ln)}
+.sc{overflow:auto;max-height:70vh}
+.note{font-size:12px;color:#666;margin:6px 0}
+#pv{overflow:auto}#pages{transform-origin:top left}
+/* ===== paper ===== */
+.sheet{background:#fff;margin:0 auto 14px;box-shadow:0 1px 8px #0003;font:9pt/1.15 Arial,"Liberation Sans",Helvetica,sans-serif;color:#000;position:relative}
+.sheet.p{width:210mm;height:296mm;padding:8mm 10mm;overflow:hidden}
+.tt{text-align:center;font-weight:bold;font-size:10.5pt;line-height:1.3;margin-bottom:2.5mm}
+.f{width:100%;border-collapse:collapse;table-layout:fixed;border:1.6px solid #000;font-weight:bold}
+.f td{border:1px solid #000;padding:0 1.2mm;height:5.3mm;vertical-align:middle;white-space:nowrap;overflow:hidden}
+.f .c{text-align:center}.f .r{text-align:right;padding-right:2mm}
+.f .v{text-align:center;padding:0}.v span{writing-mode:vertical-rl;transform:rotate(180deg);display:inline-block}
+.f .cc{text-align:center;font-size:10pt;white-space:normal}
+.f .hl,.f .t td{font-style:italic}
+.f tr.hd{height:30mm}.f tr.hd td{height:30mm;white-space:normal}
+.wm{text-align:center}.wm i{display:inline-block;transform:rotate(-35deg);font-size:21pt;color:#999;font-style:normal;font-weight:normal;letter-spacing:1px}
+.hb{display:flex;flex-direction:column;gap:1.3mm;font-style:italic;font-size:8.5pt;padding:1mm 0}
+.g2{display:flex;justify-content:space-between}.fr{padding-left:48mm}
+.bx{display:flex;height:4.5mm}.bx i{flex:1;border-right:1px solid #000}
+.f tr.ot td{height:6.5mm}
+.au{display:flex;flex-direction:column;justify-content:space-between;height:66mm;padding:2mm 0;font-style:normal}
+.wd{text-align:center;font-style:italic;white-space:normal!important;height:10mm!important;font-size:9.5pt}
+.a{width:100%;border-collapse:collapse;font-size:var(--fs,8pt)}
+.a th,.a td{border:1px solid #000;padding:1mm;text-align:right}
+.a th{text-align:center;background:#e9e9e9}
+.a td.n{text-align:left;vertical-align:top;font-weight:bold;font-size:1.05em}
+.a tr{break-inside:avoid}.a thead{display:table-header-group}
+.a tr.tot td{font-weight:bold;background:#eee}
+.em{margin:0 0 2.5mm;font-size:9pt;display:flex;gap:7mm;flex-wrap:wrap}
+.sg{display:flex;justify-content:flex-end;gap:8mm;margin-top:8mm;break-inside:avoid}
+.sg span{flex:1;border:1.6px solid #000;height:24mm;display:flex;align-items:flex-end;justify-content:center;padding:0 2mm 1.5mm;font-weight:900;font-size:9.5pt;letter-spacing:.3px;text-transform:uppercase;text-align:center}
+.sg span.dd{flex:none;width:95mm}
+.ft{position:absolute;left:10mm;right:10mm;bottom:3.5mm;display:flex;justify-content:space-between;align-items:baseline;font-size:7.5pt;color:#333;border-top:.6px solid #888;padding-top:1mm}.ft b{font-size:9pt;color:#000}
+.sheet.p .sg{margin-top:3mm}.sheet.p .sg span{height:17mm}
+.f td.c{font-size:8.5pt}
+.a small{font-weight:normal;font-size:.8em}
+.lab{position:absolute;right:10mm;top:4mm;font-size:8pt;color:#666}
+.rv{font-size:9pt}.rv p{margin:0 0 2mm;text-align:justify;padding-left:9mm;text-indent:-9mm}
+.rv p.s{padding-left:18mm}
+.ul{display:inline-block;min-width:45mm;border-bottom:1px solid #000;text-align:center}
+.two{display:flex;gap:0;margin-top:3mm;align-items:flex-start}
+.dl,.dr,.pay{border-collapse:collapse;table-layout:fixed}
+.dl{width:100mm;border:1px solid #000}.dr{width:90mm;border:1px solid #000;border-left:0}
+.dl td,.dr td{padding:0 1.3mm;height:5.6mm;white-space:nowrap;overflow:hidden}
+.dl td+td{border-left:1px solid #000}.dr td+td{border-left:1px solid #000}
+.dl tr.th td{height:9mm;border-bottom:1px solid #000}
+.dl tr.t td,.dr tr.t td{border-top:1px solid #000;font-weight:bold;font-style:italic}
+.rr{text-align:right;font-weight:bold;font-style:italic}
+.dr .wd{border-top:1px solid #000}
+.stp{display:flex;gap:10mm;margin:4mm 0 5mm}.stp span{flex:1;height:27mm;border:1.6px solid #000;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2mm;font:900 11pt Arial,sans-serif;letter-spacing:.4px;text-transform:uppercase}
+.pay{width:130mm;font-size:9pt}.pay td{height:6mm;padding:0 1mm;vertical-align:bottom}
+.pay td.b{border-bottom:1px solid #000;text-align:right;width:34mm}
+@page{size:A4;margin:0}
+@media print{
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ body{background:#fff}.bar,.tab:not(#pv),.note,.hint{display:none!important}
+ #pv{display:block!important;padding:0;overflow:visible}#pages{zoom:1!important;transform:none!important}
+ .sheet{margin:0;box-shadow:none;break-after:page}.sheet:last-child{break-after:auto}
+
+}
+</style></head><body>
+<div class="bar"><h1>Form T.R.22 · Arrears Pay Bill</h1>
+<button class="pri" id="pr">🖨 Print / Save PDF</button>
+<label style="flex-direction:row;align-items:center;gap:4px">Copies <select data-p="copies" data-n="1" style="padding:5px"><option>1</option><option>2</option><option>3</option></select></label>
+<button id="sv">⬇ Save data</button><label class="btn" style="flex-direction:row;color:inherit;font-size:14px">⬆ Load data<input type="file" id="ld" accept=".json,application/json" hidden></label>
+<button id="rs">New / reset</button>
+<div class="tbs"><button data-t="d" class="on">1 · Details</button><button data-t="m">2 · Monthly data</button><button data-t="pv">3 · Preview &amp; print</button></div></div>
+
+<div class="tab on" id="d">
+ <div class="card"><h2>Employee</h2><div class="gr" id="fe"></div></div>
+ <div class="card"><h2>Office &amp; bill header</h2><div class="gr" id="fo"></div></div>
+ <div class="card"><h2>Payment (reverse side)</h2><div class="gr" id="fp"></div></div>
+ <div class="card"><h2>Allowance heads <small style="font-weight:normal;color:#666">— tick the ones used in this bill (they become columns in the statement)</small></h2><div class="sc" style="max-height:none"><table class="t hd" id="fh"></table></div></div>
+ <div class="card"><h2>Other allowances &amp; extra pay (lump sums, optional)</h2><div class="gr" id="fx"></div></div>
+</div>
+
+<div class="tab" id="m">
+ <div class="card"><h2>Generate months</h2><div class="gr" style="align-items:end;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))">
+ <label>From<input type="month" id="gf"></label><label>To<input type="month" id="gt"></label>
+ <button id="gen">Generate rows</button><button id="add">+ Add next month</button></div>
+ <div class="note">Generate copies the amounts of the first row into every month; then edit only the months that differ. Whole rupees only. A red month = duplicate month.</div></div>
+ <div class="card sc"><table class="t" id="grid"></table></div>
+</div>
+
+<div class="tab" id="pv">
+ <div class="hint note">In the print dialog choose <b>Save as PDF</b> · Paper <b>A4</b> · Margins <b>None</b> (or Default) · Scale <b>100%</b> · tick <b>Background graphics</b>. All pages are A4 portrait, numbered “Page n of N”. Order: <b>1</b> Obverse · <b>2</b> Month-wise pay &amp; allowances · <b>3</b> Deductions &amp; recoveries · <b>4</b> Reverse. Print <b>double-sided, flip on long edge</b>; with several copies a blank back is inserted when the page count is odd.
+ Zoom <select id="zm"><option value="1">100%</option><option value=".8">80%</option><option value=".6">60%</option><option value=".45">45%</option></select></div>
+ <div id="pages"></div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const n=v=>{const x=Number(v);return Number.isFinite(x)?x:0},ru=v=>Math.max(0,Math.round(n(v)));
+const f0=v=>Math.round(n(v)).toLocaleString('en-US'),A=(v,b)=>n(v)?f0(v):b?'':'-';
+const MN='Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' '),LB=['ORIGINAL','DUPLICATE','TRIPLICATE'];
+const DED=[['G.P. Fund Ded:'],['B.F'],['G.I'],['House Purc: Adv:'],['Other Recovery'],['Income Tax Post'],['P.Tax']];
+const LS='tr22v3',MAXFILE=2*1024*1024,MAXROWS=240;
+const mlab=m=>{const[y,k]=(m||'-').split('-');return k?MN[k-1]+'-'+y:'—'};
+const nextM=m=>{let[y,k]=String(m||'').split('-').map(Number);if(!y||!k)return m;if(++k>12){k=1;y++}return y+'-'+String(k).padStart(2,'0')};
+const TODAY=new Date(new Date()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10),MAXM=TODAY.slice(0,7);
+const isM=m=>/^\d{4}-(0[1-9]|1[0-2])$/.test(m||''),okM=m=>isM(m)&&m<=MAXM;
+const fd=x=>{if(!x||!/^\d{4}-\d{2}-\d{2}$/.test(x))return'';const[y,m,d]=x.split('-');return d+'-'+(MN[+m-1]||m)+'-'+y},fdm=m=>m?fd(m+'-01'):'—';
+const O='One Two Three Four Five Six Seven Eight Nine Ten Eleven Twelve Thirteen Fourteen Fifteen Sixteen Seventeen Eighteen Nineteen'.split(' '),TY='Twenty Thirty Forty Fifty Sixty Seventy Eighty Ninety'.split(' ');
+const w2=x=>x<20?O[x-1]:TY[(x/10|0)-2]+(x%10?' '+O[x%10-1]:''),w3=x=>(x>99?O[(x/100|0)-1]+' Hundred'+(x%100?' ':''):'')+(x%100?w2(x%100):'');
+function words(v){v=Math.round(n(v));if(v<=0)return'Rupees Zero only';if(v>99999999999)return'Rupees '+f0(v)+' only';
+ const p=[],c=v/1e7|0,l=v/1e5%100|0,t=v/1e3%100|0,h=v%1000;
+ if(c)p.push((c>99?w3(c):c>19?w2(c):w3(c))+' Crore');if(l)p.push(w2(l)+(l>1?' Lacs':' Lac'));if(t)p.push(w2(t)+' Thousand');if(h)p.push(w3(h));return'Rupees '+p.join(' ')+' only'}
+
+/* ---------- blank form defaults ---------- */
+const HD=[['House Rent Allowances.','HRA','A01202',1],['Conveyance Allow:/P.T.A','C.A','A01203',1],['Medical Allowances.','M.A','A01217',1],['Differential Allwc 1-15','Differential Allw 1-15','',1],['A.R.A 2023 35%','A.R.A 2023, 35%','A0124X',1],['A.R.A 2024 25%','A.R.A 2024, 25%','',1],['A.R.A 2026 15%','A.R.A 2026, 15%','',1],['Teaching Allowances.','Teaching Allw','',0],...[2013,2015,2016,2017,2018,2019].map(y=>['A.R.A '+y,'A.R.A '+y,y==2013?'A0121T':'',0])];
+const D=()=>({copies:1,sz:false,dc:['','','','','','',''],pp:[0,0,0],
+ o:{type:'',est:'',sub:'',cc:'',govt:'',vou:'',moa:'',tre:'',ddo:'',ctl:'',fun:'',f1:'',f2:'',f3:'',from:'',to:'',itc:'',spc:'',paycode:'',manual:false,absent:'',ddon:'',pm:'transfer',payTo:'',bank:''},
+ e:{name:'',rel:'S/o',father:'',sap:'',desig:'',bps:''},
+ heads:HD.map(h=>({l:h[0],s:h[1],c:h[2],au:'',on:!!h[3]})),
+ other:['Overtime Allow:','Honoraria','Rest & Recreation Allow:','Leave Salary','Other Allow:(F.Cant.Allow)'].map(l=>({l,c:'',a:0})),
+ rows:[{m:'',pay:0,a:Array(HD.length).fill(0),d:Array(DED.length).fill(0)}]});
+let S,T;
+const str=v=>v==null?'':String(v);
+const padA=(arr,len,fill)=>Array.from({length:len},(_,i)=>arr&&arr[i]!=null?arr[i]:fill);
+function rowOf(r,nh){r=r&&typeof r==='object'?r:{};return{m:okM(r.m)?r.m:(isM(r.m)?MAXM:''),pay:ru(r.pay),a:padA(Array.isArray(r.a)?r.a:[],nh,0).map(ru),d:padA(Array.isArray(r.d)?r.d:[],DED.length,0).map(ru)}}
+function sanitize(s){
+ const d=D();if(!s||typeof s!=='object'||Array.isArray(s))return d;
+ const o={...d};
+ o.copies=Math.min(3,Math.max(1,ru(s.copies)||1));o.sz=!!s.sz;
+ o.dc=padA(Array.isArray(s.dc)?s.dc:d.dc,DED.length,'').map(str);
+ o.pp=padA(Array.isArray(s.pp)?s.pp:d.pp,3,0).map(ru);
+ o.o={...d.o,...(s.o&&typeof s.o==='object'?s.o:{})};
+ o.e={...d.e,...(s.e&&typeof s.e==='object'?s.e:{})};
+ ['type','est','sub','cc','govt','vou','moa','tre','ddo','ctl','fun','f1','f2','f3','from','to','itc','spc','paycode','absent','ddon','pm','payTo','bank'].forEach(k=>o.o[k]=str(o.o[k]));
+ o.o.manual=!!o.o.manual;if(!['transfer','cash',''].includes(o.o.pm))o.o.pm='transfer';
+ ['name','rel','father','sap','desig','bps'].forEach(k=>o.e[k]=str(o.e[k]));
+ if(!['S/o','D/o','W/o'].includes(o.e.rel))o.e.rel='S/o';
+ const hs=Array.isArray(s.heads)?s.heads:[];
+ o.heads=d.heads.map((h,i)=>{const x=hs[i]&&typeof hs[i]==='object'?hs[i]:{};return{l:str(x.l??h.l),s:str(x.s??h.s),c:str(x.c??h.c),au:str(x.au??h.au),on:x.on==null?h.on:!!x.on}});
+ const ot=Array.isArray(s.other)?s.other:[];
+ o.other=d.other.map((x,i)=>{const y=ot[i]&&typeof ot[i]==='object'?ot[i]:{};return{l:str(y.l??x.l),c:str(y.c??x.c),a:ru(y.a)}});
+ const rows=Array.isArray(s.rows)?s.rows.filter(r=>r&&typeof r==='object'):[];
+ o.rows=(rows.length?rows:d.rows).slice(0,MAXROWS).map(r=>rowOf(r,o.heads.length));
+ if(!o.rows.length)o.rows=[rowOf({},o.heads.length)];
+ return o}
+const gp=p=>p.split('.').reduce((o,k)=>o==null?undefined:o[k],S);
+const sp=(p,v)=>{const k=p.split('.');let o=S;for(let i=0;i<k.length-1;i++){const x=k[i],nkey=/^\d+$/.test(k[i+1]);if(o[x]==null||typeof o[x]!=='object')o[x]=nkey?[]:{};o=o[x]}o[k[k.length-1]]=v};
+
+/* ---------- calculations ---------- */
+function calc(){
+ const on=S.heads.map(h=>h.on),R=S.rows.map(r=>{const e=n(r.pay)+r.a.reduce((t,v,i)=>t+(on[i]?n(v):0),0),d=r.d.reduce((t,v)=>t+n(v),0);return{e,d,net:e-d}});
+ const sm=f=>S.rows.reduce((t,r)=>t+f(r),0),t={R};
+ t.pay=sm(r=>n(r.pay));t.a=S.heads.map((h,i)=>h.on?sm(r=>n(r.a[i])):0);t.d=DED.map((x,k)=>sm(r=>n(r.d[k])));
+ t.e=R.reduce((x,r)=>x+r.e,0);t.ded=t.d.reduce((x,y)=>x+y,0);t.reg=t.a.reduce((x,y)=>x+y,0);
+ t.oth=S.other.reduce((x,o)=>x+n(o.a),0);t.payTot=t.pay+S.pp.reduce((x,y)=>x+n(y),0);
+ t.gross=t.payTot+t.reg+t.oth;t.net=t.gross-t.ded;return t}
+function isoRange(){const ms=S.rows.map(r=>r.m).filter(isM).sort();if(!ms.length)return['',''];const[y2,k2]=ms.at(-1).split('-'),last=y2+'-'+k2+'-'+String(new Date(y2,k2,0).getDate()).padStart(2,'0');return[ms[0]+'-01',last>TODAY?TODAY:last]}
+function range(){return[fd(S.o.from),fd(S.o.to)]}
+
+/* ---------- paper: obverse ---------- */
+function obverse(lab,k,N){const o=S.o,e=S.e,[fr,to]=range(),pp=S.pp;
+ const it=i=>{const h=S.heads[i]||{l:'',c:''};return`${i==4?`<td rowspan="10" class="cc">${esc(e.sap)}</td>`:''}<td>${i+1}.&nbsp; ${esc(h.l)}</td><td class="c">${esc(h.c)}</td><td class="r">${A(T.a[i])}</td><td></td>`};
+ return`<section class="sheet p"><div class="lab">${lab}</div>
+<div class="tt">FORM T.R.22<br>(See rule 265) OBVERSE<br><u>DETAILED PAY BILL OF ${esc(o.type)} ${esc(o.est)}</u><br><u>FOR THE MONTH FROM ${fr} TO ${to}</u>${o.sub?`<br>${esc(o.sub)}`:''}</div>
+<table class="f"><colgroup><col style="width:8mm"><col style="width:40mm"><col style="width:76mm"><col style="width:16mm"><col style="width:38mm"><col style="width:12mm"></colgroup>
+<tr class="hd"><td colspan="2" class="wm"><i>${lab}</i></td><td colspan="4"><div class="hb">
+<div class="g2"><span>Voucher No. ${esc(o.vou)}</span><span>Month of A/C ${esc(o.moa)}</span></div><div>${esc(o.govt)}</div><div class="g2"><span>Treasury Code No. ${esc(o.tre)}</span><span>Special Code ${esc(o.spc)}</span></div><div>Drawing &amp; Disbursing Officer Code No. ${esc(o.ddo)}</div><div>Controlling Officer Code No. ${esc(o.ctl)}</div><div class="fr">Functional Code No. ${esc(o.fun)}</div><div>${esc(o.f1)}</div><div class="g2"><span>${esc(o.f2)}</span><span>${esc(o.f3)}</span></div></div></td></tr>
+<tr><td colspan="2"><div class="bx"><i></i><i></i><i></i><i></i></div></td><td colspan="4"></td></tr>
+<tr><td rowspan="6" class="v"><span>Cost Center</span></td><td rowspan="6" class="cc">${esc(o.cc)}</td><td class="hl">Establishment Charge</td><td rowspan="2" class="c">Object Code No.</td><td colspan="2" class="c">Amount</td></tr>
+<tr><td class="hl">&nbsp;&nbsp;Pay 010</td><td class="c">Rs.</td><td class="c">Ps.</td></tr>
+<tr><td>&nbsp;&nbsp;Pay of Establishment</td><td class="c">${esc(payCode())}</td><td class="r">${A(T.pay)}</td><td></td></tr>
+<tr><td>&nbsp;&nbsp;Personal Pay</td><td class="c">013</td><td class="r">${A(pp[0],1)}</td><td></td></tr>
+<tr><td>&nbsp;&nbsp;Special Pay</td><td class="c">014</td><td class="r">${A(pp[1],1)}</td><td></td></tr>
+<tr><td>&nbsp;&nbsp;Other Pay</td><td class="c">010</td><td class="r">${A(pp[2],1)}</td><td></td></tr>
+<tr class="t"><td></td><td rowspan="6" class="cc">${esc((e.name||'').toUpperCase())}</td><td>Total of Pay</td><td class="c">019</td><td class="r">${A(T.payTot)}</td><td></td></tr>
+<tr><td rowspan="15" class="v"><span>Name and PID</span></td><td class="hl">Regular Allowances 020</td><td></td><td></td><td></td></tr>
+${[0,1,2,3,4,5,6,7,8,9,10,11,12,13].map(i=>`<tr>${it(i)}</tr>`).join('')}
+<tr class="t"><td></td><td></td><td>Total Regular Allowance.</td><td class="c">020</td><td class="r">${A(T.reg)}</td><td></td></tr>
+<tr class="ot"><td colspan="2" rowspan="11"><div class="au"><div>For use in Audit Office</div><div>Admitted&nbsp; Rs.</div><div>Objected&nbsp; Rs.</div><div>Auditor&nbsp; Superintendent.</div></div></td><td class="hl">Other Allowances 020</td><td></td><td></td><td></td></tr>
+${S.other.map((x,i)=>`<tr class="ot"><td>${i+1}.&nbsp; ${esc(x.l)}</td><td class="c">${esc(x.c)}</td><td class="r">${A(n(x.a),1)}</td><td></td></tr>`).join('')}
+<tr class="t"><td>Total Other Allowances</td><td></td><td class="r">${A(T.oth)}</td><td></td></tr>
+<tr class="t"><td>Gross Salary Est: Charge.</td><td></td><td class="r">${A(T.gross)}</td><td></td></tr>
+<tr class="t"><td>Total Deduction (Details on last page)</td><td></td><td class="r">${A(T.ded)}</td><td></td></tr>
+<tr class="t"><td>Net Amount Payable.</td><td></td><td class="r">${A(T.net)}</td><td></td></tr>
+<tr><td colspan="4" class="wd"><b>(${words(T.net)})</b></td></tr></table><div class="sg"><span class="dd">DDO Stamp With Name</span></div>${ft(k,N)}</section>`}
+
+/* ---------- paper: reverse ---------- */
+const CERT=['Received contents and certified that I have satisfied myself that all emoluments included in this bill drawn one month/two/three months previous to this date, with the exception of those detailed below of which the total has been refunded by deduction from this bill have been disbursed to the proper persons and that their acquittances have been taken and filed in my office with receipt stamp duly cancelled for every payment in excess of twenty rupees.',
+'Certified that no person has been absent either on other duty or suspension or without leave (except on casual leave) during the month of ',
+'Certified that no leave has been granted until by reference to the applicant’s service book, leave accounts and to leave rules applicable to him I had satisfied myself that it was admissible and that all grants of leave and departures on and returns from leave and all period of suspension and other duty and other leaves which are required under the rules to be recorded have been recorded in the service books and leave accounts under my attestation.',
+'Certified that all appointments and substantive promotions and such of the officiating promotions as have to be entered in the service books of the persons concerned under my attestation.',
+'Certified that each official for whom house rent allowance / conveyance allowance has been claimed in this bill:-'];
+function reverse(lab,k,N){const o=S.o,d=T.d,pm=o.pm,pv=d[0]+d[1]+d[2]+d[3]+d[4]+d[6];
+ const L=[['G.P.Fund .',d[0],0],['Group Insurance Fund',d[2],2],['Benevolent Fund',d[1],1],['House Rent',0,-1],['House Building Advances',d[3],3],['Motor Cycle Advances',0,-1],['Cycle Advances',0,-1],['Others Advances (Eid Adv:)',0,-1],['Professional Tax.',d[6],6],['Other Recovery of Overpayment',d[4],4]];
+ const R=[['Income Tax '+esc(o.itc)+' Rs.',d[5]],['P.L.I '+esc(o.itc)+' Rs.',0],['Other Fund Rs.',0],['Other central Ded: Rs.',0]];
+ return`<section class="sheet p rv"><div class="lab">${lab}</div>
+${CERT.map((c,i)=>`<p>${i+1}.&nbsp;&nbsp;&nbsp;&nbsp;${c}${i==1?`<span class="ul">${esc(o.absent)}</span>`:''}</p>`).join('')}
+<p class="s">a)&nbsp;&nbsp;&nbsp;&nbsp;has neither been provided with accommodation by the Government nor sharing such accommodation with another allottee without necessary permission of the Estate Officer and is not in occupation of rent free Government Quarter;</p>
+<p class="s">b)&nbsp;&nbsp;&nbsp;&nbsp;his/her wife/husband is not in the service of the Federal/Provincial Government/Autonomous Body.</p>
+<div class="g2" style="margin-top:6mm;font-weight:bold"><u>Under Rupees:-</u><span style="text-align:center"><u>Signature &amp; Designation D.D.O</u><br><span style="font-weight:normal">${esc(o.ddon)}</span></span></div>
+<div class="two"><table class="dl"><colgroup><col style="width:58mm"><col style="width:14mm"><col style="width:28mm"></colgroup>
+<tr class="th"><td>Gross Salary of Estt: Rs. <b>${f0(T.gross)}</b></td><td style="text-align:center">Code No</td><td style="text-align:center">Rs. &nbsp; Ps.</td></tr>
+<tr><td colspan="3"><b>Deduction</b></td></tr>
+${L.map(x=>`<tr><td>${x[0]}</td><td style="text-align:center;font-size:8pt">${esc(S.dc[x[2]]||'')}</td><td class="rr">${A(x[1],1)}</td></tr>`).join('')}
+<tr class="t"><td colspan="2">Total Provincial deduction ( P to P)</td><td class="rr">${A(pv,1)}</td></tr></table>
+<table class="dr"><colgroup><col style="width:64mm"><col style="width:26mm"></colgroup>
+${R.map(x=>`<tr><td>${x[0]}</td><td class="rr">${A(x[1],1)}</td></tr>`).join('')}
+<tr class="t"><td>Total Central Ded: (P &amp; C) Rs.</td><td class="rr">${A(d[5],1)}</td></tr>
+<tr class="t"><td>Total Deduction P &amp; C Rs.</td><td class="rr">${A(T.ded,1)}</td></tr>
+<tr class="t"><td>Net: Amount Payable Rs.</td><td class="rr">${A(T.net,1)}</td></tr>
+<tr><td colspan="2" class="wd"><b>${words(T.net)}</b></td></tr></table></div>
+<div style="margin-top:4mm;font-size:9pt"><b>Received Payment</b><br>Please Pay to <u>${esc(o.payTo||S.e.name)}</u> ${esc(o.bank)}</div>
+<div class="stp"><span>DDO Stamp With Name</span><span>DDO Stamp With Name</span></div>
+<table class="pay"><colgroup><col style="width:30mm"><col style="width:36mm"><col style="width:20mm"><col></colgroup>
+<tr><td>Pay Rs.</td><td class="b">${pm=='cash'?f0(T.net):''}</td><td style="padding-left:6mm">Rupees</td><td class="b" rowspan="3" style="text-align:left;vertical-align:top;font-size:8pt;white-space:normal;width:auto">${pm?words(T.net):''}</td></tr>
+<tr><td>by Transfer Rs.</td><td class="b">${pm=='transfer'?f0(T.net):''}</td><td></td></tr>
+<tr><td>Total Rs.</td><td class="b">${pm?f0(T.net):''}</td><td></td></tr></table>${ft(k,N)}</section>`}
+
+/* ---------- paper: month-wise statements (portrait) ---------- */
+const payCode=()=>S.o.paycode||(S.e.bps?(n(S.e.bps)>=17?'A01101':'A01151'):'012');
+const CH=24,pc=()=>Math.max(1,Math.ceil((S.rows.length||1)/CH));
+const ft=(k,N)=>`<div class="ft"><span>Created &amp; designed by Asif Ali Shar</span><b>Page ${k} of ${N}</b></div>`;
+const sub=(t,lab)=>{const o=S.o,e=S.e,[fr,to]=range();return`<div class="lab">${lab}</div>
+<div class="tt">FORM T.R.22 — <u>${t}</u><br><span style="font-size:9pt">${esc(o.type)} ${esc(o.est)} · FOR THE MONTH FROM ${fr} TO ${to}</span></div>
+<div class="em"><span>Name: <b>${esc(e.name)}</b></span><span>SAP ID / PID: <b>${esc(e.sap)}</b></span>${e.desig?`<span>Designation: <b>${esc(e.desig)}</b></span>`:''}${e.bps?`<span>BPS: <b>${esc(e.bps)}</b></span>`:''}<span>Cost Center: <b>${esc(o.cc)}</b></span></div>`};
+const nmc=k=>`<td class="n" rowspan="${k}">${esc(S.e.name)}${S.e.father?` ${esc(S.e.rel)} ${esc(S.e.father)}`:''}<br><span style="font-weight:normal">SAP ID: ${esc(S.e.sap)}</span></td>`;
+const SG='<div class="sg"><span class="dd">DDO Stamp With Name</span></div>';
+function stmt(lab,k0,N,title,fs,head,cell,tot,extra){let h='';const P=pc();
+ for(let p=0;p<P;p++){const ix=S.rows.map((r,i)=>i).slice(p*CH,(p+1)*CH),last=p==P-1;
+  h+=`<section class="sheet p" style="--fs:${fs}pt">${sub(title,lab)}<table class="a"><thead><tr>${head}</tr></thead><tbody>${ix.map((i,j)=>`<tr>${j?'':nmc(ix.length)}<td style="text-align:center">${fdm(S.rows[i].m)}</td>${cell(S.rows[i],i)}</tr>`).join('')}${last?`<tr class="tot"><td colspan="2" style="text-align:center">Total</td>${tot}</tr>`:''}</tbody></table>${last?extra+SG:'<div style="text-align:right;font-size:8pt;margin-top:2mm"><i>Continued on next page…</i></div>'}${ft(k0+p,N)}</section>`}
+ return h}
+function earnings(lab,k0,N){const hs=S.heads.map((h,i)=>i).filter(i=>S.heads[i].on&&(S.sz||T.a[i])),cols=4+hs.length,fs=cols<=9?9:cols<=12?8:cols<=15?7:6.2,
+ au=S.heads.filter(h=>h.on&&h.au).map(h=>`<div>${esc(h.s)}${h.c?` (${esc(h.c)})`:''}: ${esc(h.au)}</div>`).join('');
+ return stmt(lab,k0,N,'STATEMENT OF ARREARS — BASIC PAY &amp; ALLOWANCES (MONTH-WISE)',fs,
+  `<th>NAME</th><th>PERIOD</th><th>PAY<br><small>${esc(payCode())}</small></th>${hs.map(i=>`<th>${esc(S.heads[i].s)}${S.heads[i].c?`<br><small>${esc(S.heads[i].c)}</small>`:''}</th>`).join('')}<th>TOTAL (GROSS)</th>`,
+  (r,i)=>`<td>${A(n(r.pay))}</td>${hs.map(j=>`<td>${A(n(r.a[j]))}</td>`).join('')}<td><b>${A(T.R[i].e)}</b></td>`,
+  `<td>${A(T.pay)}</td>${hs.map(j=>`<td>${A(T.a[j])}</td>`).join('')}<td>${A(T.e)}</td>`,
+  au?`<div style="font-size:7.5pt;margin-top:2mm"><b>Authority (Finance Department letters):</b>${au}</div>`:'')}
+function deductions(lab,k0,N){const ds=DED.map((x,i)=>i).filter(i=>S.sz||T.d[i]);
+ return stmt(lab,k0,N,'STATEMENT OF DEDUCTIONS &amp; RECOVERIES (MONTH-WISE)',ds.length>5?8:9,
+  `<th>NAME</th><th>PERIOD</th><th>GROSS</th>${ds.map(i=>`<th>${DED[i][0]}${S.dc[i]?`<br><small>${esc(S.dc[i])}</small>`:''}</th>`).join('')}<th>TOTAL DEDUCTION</th><th>NET PAYABLE</th>`,
+  (r,i)=>`<td>${A(T.R[i].e)}</td>${ds.map(k=>`<td>${A(n(r.d[k]))}</td>`).join('')}<td><b>${A(T.R[i].d)}</b></td><td><b>${A(T.R[i].net)}</b></td>`,
+  `<td>${A(T.e)}</td>${ds.map(k=>`<td>${A(T.d[k])}</td>`).join('')}<td>${A(T.ded)}</td><td>${A(T.e-T.ded)}</td>`,
+  `<div style="margin-top:3mm;font-weight:bold">Net amount payable: Rs. ${f0(T.net)} — ${words(T.net)}</div>`)}
+function pages(){const el=$('#pages');if(!el)return;const P=pc(),N=2+2*P;let h='';for(let c=0;c<S.copies;c++){h+=obverse(LB[c]||('COPY '+(c+1)),1,N)+earnings(LB[c]||('COPY '+(c+1)),2,N)+deductions(LB[c]||('COPY '+(c+1)),2+P,N)+reverse(LB[c]||('COPY '+(c+1)),N,N);if(N%2&&c<S.copies-1)h+='<section class="sheet p"></section>'}el.innerHTML=h}
+
+/* ---------- UI ---------- */
+const fl=(p,l,t='text')=>`<label>${l}<input type="${t}" data-p="${p}" value="${esc(gp(p))}"></label>`;
+const sl=(p,l,op)=>`<label>${l}<select data-p="${p}">${op.map(([v,t])=>`<option value="${v}"${gp(p)==v?' selected':''}>${t}</option>`).join('')}</select></label>`;
+const ni=(p,v)=>`<input type="number" step="1" min="0" data-p="${p}" value="${v||''}">`;
+const dt=(p,l)=>`<label>${l}<input type="date" data-p="${p}" max="${TODAY}" value="${esc(gp(p))}"></label>`;
+function forms(){
+ const fe=$('#fe'),fo=$('#fo'),fp=$('#fp'),fh=$('#fh'),fx=$('#fx');if(!fe||!fo||!fp||!fh||!fx)return;
+ fe.innerHTML=fl('e.name','Name')+sl('e.rel','Relation',[['S/o','S/o'],['D/o','D/o'],['W/o','W/o']])+fl('e.father','Father / Husband name')+fl('e.sap','SAP ID / PID')+fl('e.desig','Designation')+fl('e.bps','BPS (grade)');
+ fo.innerHTML=fl('o.type','Pay bill of (Permanent/Temporary)')+fl('o.est','Establishment / School / Office')+fl('o.sub','Sub-heading (optional)')+fl('o.cc','Cost Center')+dt('o.from','Period from')+dt('o.to','Period to')+'<label><span>&nbsp;</span><button type="button" id="auto">Auto from months</button></label><div class="note" id="fdh" style="grid-column:1/-1"></div>'+fl('o.govt','Government')+fl('o.vou','Voucher No.')+fl('o.moa','Month of A/C')+fl('o.tre','Treasury Code No.')+fl('o.spc','Treasury special code')+fl('o.paycode','Pay object code (blank = auto by BPS)')+fl('o.ddo','DDO Code No.')+fl('o.ctl','Controlling Officer Code No.')+fl('o.fun','Functional Code No.')+fl('o.f1','Function line 1')+fl('o.f2','Function line 2')+fl('o.f3','Function line 3')+fl('o.itc','Income Tax / PLI code')+
+  `<label class="ck"><input type="checkbox" data-p="sz"${S.sz?' checked':''}> Show empty (all-zero) columns in the statements</label>`;
+ fp.innerHTML=sl('o.pm','Payment mode',[['transfer','By transfer'],['cash','Cash'],['','Leave blank']])+fl('o.payTo','Please pay to (blank = employee)')+fl('o.bank','Bank / account note')+fl('o.absent','Month for certificate 2')+fl('o.ddon','DDO name &amp; designation')+DED.map((x,k)=>fl('dc.'+k,x[0]+' — code')).join('');
+ fh.innerHTML='<tr><th>Use</th><th>#</th><th>Label on form</th><th>Statement column</th><th>Object code</th><th>Authority (Finance Dept. letter No. &amp; date)</th></tr>'+S.heads.map((h,i)=>`<tr><td><input type="checkbox" data-p="heads.${i}.on"${h.on?' checked':''}></td><td>${i+1}</td><td><input data-p="heads.${i}.l" value="${esc(h.l)}" style="width:220px"></td><td><input data-p="heads.${i}.s" value="${esc(h.s)}" style="width:170px"></td><td><input data-p="heads.${i}.c" value="${esc(h.c)}" style="width:75px"></td><td><input data-p="heads.${i}.au" value="${esc(h.au||'')}" style="width:300px"></td></tr>`).join('');
+ fx.innerHTML=S.other.map((x,i)=>fl(`other.${i}.l`,'Other allowance '+(i+1))+`<label>Amount (Rs.)${ni(`other.${i}.a`,x.a).replace('<input','<input style="width:100%;border:1px solid var(--ln);padding:5px;text-align:left"')}</label>`).join('')+
+  ['Personal Pay 013','Special Pay 014','Other Pay 010'].map((l,i)=>`<label>${l} (Rs.)${ni('pp.'+i,S.pp[i]).replace('<input','<input style="width:100%;border:1px solid var(--ln);padding:5px;text-align:left"')}</label>`).join('');
+ const cop=document.querySelector('[data-p=copies]');if(cop)cop.value=S.copies}
+function grid(){const g=$('#grid');if(!g)return;const hs=S.heads.map((h,i)=>i).filter(i=>S.heads[i].on);
+ g.innerHTML=`<thead><tr><th>#</th><th>Month</th><th>Pay</th>${hs.map(i=>`<th>${esc(S.heads[i].s)}</th>`).join('')}<th>Total</th>${DED.map(x=>`<th>${x[0]}</th>`).join('')}<th>Ded.</th><th>Net</th><th></th></tr></thead><tbody>`+
+ S.rows.map((r,i)=>`<tr><td>${i+1}</td><td><input type="month" max="${MAXM}" id="m${i}" data-p="rows.${i}.m" value="${r.m}"></td><td>${ni(`rows.${i}.pay`,r.pay)}</td>${hs.map(j=>`<td>${ni(`rows.${i}.a.${j}`,r.a[j])}</td>`).join('')}<td class="k" id="re${i}"></td>${DED.map((x,k)=>`<td>${ni(`rows.${i}.d.${k}`,r.d[k])}</td>`).join('')}<td class="k" id="rd${i}"></td><td class="k" id="rn${i}"></td><td style="white-space:nowrap"><button data-act="dup" data-i="${i}" title="Duplicate row">⧉</button><button data-act="del" data-i="${i}" title="Delete row">✕</button></td></tr>`).join('')+
+ `</tbody><tfoot><tr><td colspan="2">Total</td><td id="tp"></td>${hs.map(j=>`<td id="ta${j}"></td>`).join('')}<td id="te"></td>${DED.map((x,k)=>`<td id="td${k}"></td>`).join('')}<td id="tdd"></td><td id="tn"></td><td></td></tr></tfoot>`}
+const tx=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=f0(v)};
+function persist(){try{localStorage.setItem(LS,JSON.stringify(S))}catch(err){}}
+function upd(){if(!S.o.manual){const[a,b]=isoRange();S.o.from=a;S.o.to=b;['o.from','o.to'].forEach(q=>{const i=document.querySelector(`[data-p="${q}"]`);if(i)i.value=gp(q)})}
+ T=calc();const hh=$('#fdh');if(hh)hh.textContent='Prints as: '+range().join('  to  ');S.rows.forEach((r,i)=>{tx('re'+i,T.R[i].e);tx('rd'+i,T.R[i].d);tx('rn'+i,T.R[i].net);
+  const m=document.getElementById('m'+i);if(m)m.classList.toggle('dup',!!r.m&&S.rows.some((q,j)=>j!=i&&q.m==r.m))});
+ tx('tp',T.pay);T.a.forEach((v,j)=>tx('ta'+j,v));tx('te',T.e);T.d.forEach((v,k)=>tx('td'+k,v));tx('tdd',T.ded);tx('tn',T.e-T.ded);
+ pages();persist()}
+function boot(){forms();grid();const gf=$('#gf'),gt=$('#gt');if(gf)gf.max=MAXM;if(gt)gt.max=MAXM;upd()}
+const cl=o=>JSON.parse(JSON.stringify(o));
+function loadState(){try{return sanitize(JSON.parse(localStorage.getItem(LS)||'{}'))}catch(e){return D()}}
+
+document.addEventListener('input',e=>{const t=e.target,p=t.dataset.p;if(!p||!S)return;
+ let v=t.type=='checkbox'?t.checked:(t.type=='number'||t.dataset.n)?ru(t.value):t.value;
+ if(t.type=='number'&&t.value!==''&&+t.value<0)t.value=v;
+ if(t.type=='date'||t.type=='month'){const mx=t.type=='date'?TODAY:MAXM;if(v&&v>mx){v=mx;t.value=v}if(t.type=='month'&&v&&!okM(v)&&isM(v)){v=MAXM;t.value=v}}
+ if(p=='o.from'||p=='o.to')S.o.manual=true;
+ if(p=='copies')v=Math.min(3,Math.max(1,ru(v)||1));
+ sp(p,v);upd()});
+document.addEventListener('change',e=>{if(/^heads\./.test(e.target.dataset.p||'')){grid();upd()}});
+document.addEventListener('click',e=>{if(!S)return;if(e.target.id=='auto'){S.o.manual=false;upd();return}
+ const b=e.target.closest('[data-act]'),i=b&&+b.dataset.i;
+ if(b&&Number.isInteger(i)&&S.rows[i]){if(b.dataset.act=='del'){if(S.rows.length>1)S.rows.splice(i,1)}else{if(S.rows.length>=MAXROWS)return alert('Maximum '+MAXROWS+' months reached.');const c=cl(S.rows[i]);c.m=nextM(c.m);if(!okM(c.m))return alert('Future months are not allowed.');S.rows.splice(i+1,0,c)}grid();upd()}
+ const tb=e.target.closest('[data-t]');if(tb&&tb.dataset.t){const tab=$('#'+tb.dataset.t);if(!tab)return;document.querySelectorAll('.tab,.tbs button').forEach(x=>x.classList.remove('on'));tab.classList.add('on');tb.classList.add('on')}});
+const on=(id,fn)=>{const el=$(id);if(el)el.onclick=fn};
+on('#gen',()=>{const a=$('#gf')&&$('#gf').value,b=$('#gt')&&$('#gt').value;if(!a||!b||a>b||!okM(b))return alert('Choose a valid From and To month (not in the future).');
+ let n=0,m=a;while(m<=b){n++;m=nextM(m);if(n>MAXROWS)return alert('That range is too long (max '+MAXROWS+' months).')}
+ if(S.rows.length>1&&!confirm('Replace the existing '+S.rows.length+' rows? (amounts are copied from the first row)'))return;
+ const t=S.rows[0]||rowOf({},S.heads.length),out=[];m=a;while(m<=b){const c=cl(t);c.m=m;out.push(c);m=nextM(m)}S.rows=out;grid();upd()});
+on('#add',()=>{if(S.rows.length>=MAXROWS)return alert('Maximum '+MAXROWS+' months reached.');const last=S.rows.at(-1)||rowOf({},S.heads.length);const l=cl(last);l.m=nextM(l.m);if(!okM(l.m))return alert('Future months are not allowed.');S.rows.push(l);grid();upd()});
+on('#pr',()=>{try{upd()}catch(err){}window.print()});
+const zm=$('#zm');if(zm)zm.onchange=e=>{const p=$('#pages');if(p)p.style.zoom=e.target.value};
+on('#sv',()=>{try{const blob=new Blob([JSON.stringify(S,null,1)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='TR22_'+(S.e.sap||'bill')+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500)}catch(err){alert('Could not save the file.')}});
+const ld=$('#ld');if(ld)ld.onchange=e=>{const f=e.target.files&&e.target.files[0];e.target.value='';if(!f)return;if(f.size>MAXFILE)return alert('File is too large (max 2 MB).');
+ f.text().then(t=>{let parsed;try{parsed=JSON.parse(t)}catch(err){alert('Not a valid saved bill.');return}S=sanitize(parsed);boot()}).catch(()=>alert('Could not read that file.'))};
+on('#rs',()=>{if(!confirm('Clear employee and monthly amounts? Office details are kept.'))return;const d=D(),r=cl(d.rows[0]);r.pay=0;r.a=r.a.map(()=>0);r.d=r.d.map(()=>0);S={...d,o:{...S.o,manual:false},heads:S.heads,dc:S.dc,e:{name:'',rel:'S/o',father:'',sap:'',desig:'',bps:''},rows:[r]};boot()});
+window.addEventListener('unhandledrejection',e=>e.preventDefault());
+S=loadState();boot();
+</script></body></html>
