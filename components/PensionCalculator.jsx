@@ -36,6 +36,44 @@ export default function PensionCalculator() {
   });
 
   const [previewFo2, setPreviewFo2] = useState(false);
+  const [downloading, setDownloading] = useState(false);
+
+  const downloadServerPdf = async () => {
+    setDownloading(true);
+    try {
+      const res = await fetch('/api/pension/pdf', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          emp,
+          service,
+          nextAge,
+          factor,
+          totalEmoluments,
+          grossPension,
+          commAmount,
+          commLumpsum,
+          netMonthlyPension,
+          medicalAllowance
+        })
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || 'Server PDF generation failed');
+      }
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Pension_FO2_${(emp.sap || 'record').replace(/[^a-zA-Z0-9_-]/g, '')}.pdf`;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 3000);
+    } catch (err) {
+      alert(err.message || 'Could not generate PDF');
+    } finally {
+      setDownloading(false);
+    }
+  };
 
   const calculateService = () => {
     if (!emp.doa || !emp.dor) return { years: 0, months: 0, days: 0, qualifying: 0 };
@@ -214,8 +252,11 @@ export default function PensionCalculator() {
       ) : (
         /* Printable Form 2 (FO-2) Dossier Preview */
         <div>
-          <div style={{ marginBottom: 12, display: 'flex', gap: 8 }}>
-            <button className="pri" onClick={() => window.print()}>🖨 Print Official FO-2 Paper</button>
+          <div style={{ marginBottom: 12, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            <button className="pri" onClick={downloadServerPdf} disabled={downloading}>
+              {downloading ? '⏳ Rendering PDF...' : '📥 Download FO-2 PDF (Server)'}
+            </button>
+            <button onClick={() => window.print()}>🖨 Print / Preview</button>
             <button onClick={() => setPreviewFo2(false)}>Back to Form</button>
           </div>
 

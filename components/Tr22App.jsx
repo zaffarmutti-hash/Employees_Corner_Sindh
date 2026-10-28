@@ -22,7 +22,12 @@ export default function Tr22App() {
             Arrears Pay Bill Form
           </h2>
         </div>
-        <button className="pri" id="pr">🖨 Print / Save PDF</button>
+        <button className="pri" id="dlpdf" title="Generate and download official PDF from server">
+          📥 Download Server PDF
+        </button>
+        <button id="pr" title="Open print dialog">
+          🖨 Print / Preview
+        </button>
         <label style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
           Copies{' '}
           <select data-p="copies" data-n="1" style={{ padding: 5 }}>

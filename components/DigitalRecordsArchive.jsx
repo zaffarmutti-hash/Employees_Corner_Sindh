@@ -118,6 +118,16 @@ export default function DigitalRecordsArchive({ onSelectBill }) {
                     {b.updatedAt ? new Date(b.updatedAt).toLocaleString() : '—'}
                   </td>
                   <td style={{ textAlign: 'center', whiteSpace: 'nowrap' }}>
+                    <a
+                      href={`/api/bills/${encodeURIComponent(b.id)}/pdf`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn"
+                      style={{ fontSize: 12, padding: '4px 8px', textDecoration: 'none', marginRight: 6 }}
+                      title="Download server-generated PDF"
+                    >
+                      📥 PDF
+                    </a>
                     <button
                       className="pri"
                       onClick={() => onSelectBill && onSelectBill(b.id)}
