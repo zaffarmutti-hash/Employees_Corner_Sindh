@@ -82,7 +82,7 @@ export default function EmployeesCornerPortal() {
 
   const navigateTo = (tabId) => {
     setActiveTab(tabId);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (

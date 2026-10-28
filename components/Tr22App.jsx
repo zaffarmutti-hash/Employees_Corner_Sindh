@@ -8,7 +8,11 @@ export default function Tr22App() {
 
   useEffect(() => {
     if (!root.current) return;
-    return mount(root.current);
+    try {
+      return mount(root.current);
+    } catch (err) {
+      console.error('Tr22App mount error:', err);
+    }
   }, []);
 
   return (
